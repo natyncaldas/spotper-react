@@ -1,5 +1,5 @@
 import React from 'react'
-import {Navbar, Nav} from 'react-bootstrap'
+import {Navbar, Nav, Form, FormControl, Button} from 'react-bootstrap'
 import Logo from '../assets/icons/SpotPer.png'
 
 const TheHeader = () => {
@@ -14,10 +14,13 @@ const TheHeader = () => {
         /> 
       </Navbar.Brand>
       <Nav className="mr-auto">
-        <Nav.Link href="#dashboard" className="nav-link">Albums</Nav.Link>
-        <Nav.Link href="#dashboard" className="nav-link">Playlists</Nav.Link>
+        <Nav.Link href="#albums" className="nav-link">Albums</Nav.Link>
+        <Nav.Link href="#playlists" className="nav-link">Playlists</Nav.Link>
       </Nav>
-   
+      <Form inline>
+        <FormControl type="text" placeholder="Search" className="search-field mr-sm-2" />
+        <Button variant="outline-info" className="search-button">Search</Button>
+    </Form>
   </Navbar>
     
   )

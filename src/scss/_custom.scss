@@ -17,6 +17,21 @@
      font-size: 16px;
  }
 
+ .search-field{
+     border-color: #90e6ab!important;
+ }
+
+ .search-button{
+    border-color: #90e6ab!important;
+    color: #90e6ab!important;
+}
+
+.search-button:hover{
+    background-color: #90e6ab!important;
+    border-color: #90e6ab!important;
+    color: darkslategray!important;
+}
+
  .footer{
     background-color: lightgray !important;
  }
