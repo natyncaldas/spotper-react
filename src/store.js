@@ -3,7 +3,24 @@ import {createStore} from 'redux'
 const initialState = {
   //stateName: stateValue
   albums: [],
-  selectedAlbum: {}
+  selectedAlbum: { 
+    "albumDescription": "",
+    "purchasePrice": null,
+    "purchaseDate": null,
+    "purchaseType": "",
+    "recordingDate": null,
+    "albumName": "",
+    "albumCover": ""
+  },
+  selectedTrack: {
+    "trackName": "",
+    "trackDuration": null,
+    "trackDescription": "",
+    "recordingType": "",
+    "trackNumber": null,
+    "album":{"id":null, "albumCover": ""},
+    "composition":{"id":null}
+  } 
 }
 
 const changeState = (state = initialState, {type, ...rest}) => {

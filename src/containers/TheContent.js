@@ -1,17 +1,17 @@
-import React, {Suspense} from 'react'
+import React, {Suspense, useEffect} from 'react'
 import {CContainer, CFade} from '@coreui/react'
 import {Redirect, Route, Switch} from 'react-router-dom'
 
 import AlbumsPage from 'src/views/components/AlbumsPage/AlbumsPage'
 import PlaylistsPage from 'src/views/components/PlaylistsPage/PlaylistsPage'
 import Album from 'src/views/components/Album/Album'
+import Track from 'src/views/components/Track/Track'
 
 const loading = (
   <div className="pt-3 text-center">
     <div className="sk-spinner sk-spinner-pulse"/>
   </div>
 )
-
 
 const TheContent = () => {
   
@@ -45,6 +45,15 @@ const TheContent = () => {
               render={props => (
                 <CFade>
                   <Album {...props} />
+                </CFade>
+              )}/>  
+
+              <Route
+              path="/track"
+              name="Track"
+              render={props => (
+                <CFade>
+                  <Track {...props} />
                 </CFade>
               )}/>    
               

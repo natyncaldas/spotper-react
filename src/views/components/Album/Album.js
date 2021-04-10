@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import {Card} from 'react-bootstrap'
-import {useSelector} from 'react-redux'
+import {useSelector, useDispatch} from 'react-redux'
 import './Album.scss'
 import { spotperApi } from '../../../services/api'
+import { Link } from 'react-router-dom'
 
 const Album = () => {
   const selectedAlbum = useSelector(state => state.selectedAlbum)
   const [albumTracks, setAlbumTracks] = useState([])
   const [areTracksRequested, setTracksRequested] = useState(false)
+  const dispatch = useDispatch()
 
   useEffect(() => {
 
@@ -27,11 +29,14 @@ const Album = () => {
   return (
     <>
     <h1>{selectedAlbum.albumName}</h1>
+    <Link to="/albums" className="btn btn-primary">Return to Albums</Link>
     <div className="album-flex-container">
       <img src={selectedAlbum.albumCover} className="album-cover"></img>
       {areTracksRequested?<ol>
         {albumTracks.map(track => (
-          <li className="track">{track.trackName}</li>
+          <li className="track">
+            <Link to="/track" onClick={()=>dispatch({type: 'set', selectedTrack: track})}>{track.trackName}</Link>
+          </li>
         ))}
       </ol>:null}
   
