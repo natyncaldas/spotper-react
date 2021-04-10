@@ -2,6 +2,7 @@ import {createStore} from 'redux'
 
 const initialState = {
   //stateName: stateValue
+  albums: []
 }
 
 const changeState = (state = initialState, {type, ...rest}) => {
