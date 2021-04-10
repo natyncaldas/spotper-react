@@ -1,0 +1,12 @@
+.album-flex-container{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: left;
+}
+
+.album-cover{
+    width: 400px;
+}
+.track{
+    color: white;
+}
