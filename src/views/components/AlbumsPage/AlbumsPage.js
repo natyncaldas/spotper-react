@@ -37,7 +37,7 @@ const AlbumsPage = () => {
           <Card.Title>{album.albumName}</Card.Title>
           {/*<Card.Title>{album.artists[0].name}</Card.Title>
           <Card.Text>{album.copyrights[0].text}</Card.Text>*/}
-          <Link to="/album" className="btn btn-primary" onClick={()=>dispatch({type: 'set', selectedAlbum: album})}>Go to album</Link>
+          <Link to={"/albums/".concat(album.id)} className="btn btn-primary" onClick={()=>dispatch({type: 'set', selectedAlbum: album})}>Go to album</Link>
         </Card.Body>
      </Card>
     )):null}

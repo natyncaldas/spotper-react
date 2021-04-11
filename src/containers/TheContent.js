@@ -21,6 +21,16 @@ const TheContent = () => {
       <CContainer fluid>
         <Suspense fallback={loading}>
           <Switch>
+
+              <Route
+              path="/albums/:albumId"
+              name="Album"
+              render={props => (
+                <CFade>
+                  <Album {...props} />
+                </CFade>
+              )}/> 
+
             <Route
               path="/albums"
               name="Albums"
@@ -29,16 +39,16 @@ const TheContent = () => {
                   <AlbumsPage {...props} 
                   />
                 </CFade>
-              )}/>
+              )}/> 
 
-              <Route
-              path="/album"
-              name="Album"
+            <Route
+              path="/playlists/:playlistId"
+              name="Playlist"
               render={props => (
                 <CFade>
-                  <Album {...props} />
+                  <Playlist {...props} />
                 </CFade>
-              )}/>  
+              )}/>
 
             <Route
               path="/playlists"
@@ -49,17 +59,8 @@ const TheContent = () => {
                 </CFade>
               )}/>
 
-            <Route
-              path="/playlist"
-              name="Playlist"
-              render={props => (
-                <CFade>
-                  <Playlist {...props} />
-                </CFade>
-              )}/>
-
               <Route
-              path="/track"
+              path="/track/:trackId"
               name="Track"
               render={props => (
                 <CFade>

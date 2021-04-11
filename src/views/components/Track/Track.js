@@ -1,15 +1,35 @@
 import React, { useState, useEffect } from 'react'
 import {Card} from 'react-bootstrap'
-import {useSelector} from 'react-redux'
-import { Link } from 'react-router-dom'
+import {useSelector, useDispatch} from 'react-redux'
+import { Link, useParams } from 'react-router-dom'
+import { spotperApi } from '../../../services/api'
 import './Track.scss'
 
 const Track = () => {
+    const [isTrackRequested, setTrackRequested] = useState(false)
     const selectedTrack = useSelector(state => state.selectedTrack)
     const lastVisitedPath = useSelector(state => state.lastVisitedPath)
+    const { trackId } = useParams();
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+
+        const requestGetTrackById = async() => {
+      
+          await spotperApi.get("/tracks/".concat(trackId)).then(response => {
+              if(response.status === 200) {
+                dispatch({type: 'set', selectedTrack: response.data})
+                setTrackRequested(true)
+              }})
+        }
+      
+        requestGetTrackById()
+               
+        }, [])
   
   return (
     <>
+       {isTrackRequested?<>
         <Link to={lastVisitedPath} className="btn btn-primary">Return</Link>
         <div className="track-flex-container">
         <Card style={{ width: '22rem' }} className="track-card" >
@@ -21,7 +41,7 @@ const Track = () => {
             </Card.Body>
         </Card>
         </div>
-        
+        </>:null}
   </>
   )
 }

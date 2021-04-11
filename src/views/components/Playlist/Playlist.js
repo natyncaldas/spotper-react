@@ -1,38 +1,51 @@
 import React, {useState, useEffect} from 'react'
 import {Card, Button, ListGroup} from 'react-bootstrap'
 import {useDispatch, useSelector} from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { spotperApi } from '../../../services/api'
 import './Playlist.scss'
 
 const Playlist = () => {
   const selectedPlaylist = useSelector(state => state.selectedPlaylist)
   const [playlistTracks, setPlaylistTracks] = useState([])
+  const [isPlaylistRequested, setPlaylistRequested] = useState(false)
   const [areTracksRequested, setTracksRequested] = useState(false)
   const dispatch = useDispatch()
+  const { playlistId } = useParams();
 
   useEffect(() => {
 
+    const requestGetPlaylistById = async() => {
+  
+        await spotperApi.get("/playlists/".concat(playlistId)).then(response => {
+            if(response.status === 200) {
+                dispatch({type: 'set', selectedPlaylist: response.data})
+                setPlaylistRequested(true)
+            }})
+    }
+
     const requestGetPlaylistTracks = async() => {
   
-        await spotperApi.get("/playlists/".concat(selectedPlaylist.id).concat("/tracks")).then(response => {
+        await spotperApi.get("/playlists/".concat(playlistId).concat("/tracks")).then(response => {
             if(response.status === 200) {
                 setPlaylistTracks(response.data)
                 setTracksRequested(true)
             }})
     }
-  
+    
+    requestGetPlaylistById()
     requestGetPlaylistTracks()
            
     }, [])
 
     const onTrackClick = (track) => {
         dispatch({type: 'set', selectedTrack: track})
-        dispatch({type: 'set', lastVisitedPath: "/playlist"})
+        dispatch({type: 'set', lastVisitedPath: "/playlists/".concat(playlistId)})
     }
 
     return (
         <>
+        {isPlaylistRequested?<>
         <h1>{selectedPlaylist.playlistName}</h1>
         <Link to="/playlists" className="btn btn-primary">Return to Playlists</Link>
         
@@ -41,7 +54,7 @@ const Playlist = () => {
                 {playlistTracks.map(track => (
                     <>
                     <ListGroup.Item className="track-title">
-                        <Link to="/track" onClick={onTrackClick(track)}>
+                        <Link to={"/track/".concat(track.id)} onClick={onTrackClick(track)}>
                             {track.trackName}
                         </Link>
                     </ListGroup.Item>
@@ -49,7 +62,8 @@ const Playlist = () => {
                 ))}
         
             </ListGroup>:null}
-    </>
+        </>:null}
+        </>
     )
 }
 
