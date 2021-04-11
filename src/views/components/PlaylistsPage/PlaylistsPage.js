@@ -1,20 +1,47 @@
-import {Card, Button} from 'react-bootstrap'
+import React, {useState, useEffect} from 'react'
+import {Card, Button, ListGroup} from 'react-bootstrap'
+import {useDispatch, useSelector} from 'react-redux'
+import { Link } from 'react-router-dom'
+import { spotperApi } from '../../../services/api'
+import './PlaylistsPage.scss'
 
 const PlaylistsPage = () => {
+  const [arePlaylistsRequested, setPlaylistsRequested] = useState(false)
+  const dispatch = useDispatch()
+  const playlists = useSelector(state => state.playlists)
+
+  useEffect(() => {
+
+  const requestGetPlaylists = async() => {
+
+    await spotperApi.get("/playlists").then(response => {
+        if(response.status === 200) {
+          dispatch({type: 'set', playlists: response.data})
+          setPlaylistsRequested(true)
+        }})
+  }
+
+  requestGetPlaylists()
+         
+  }, [])
+
   return (
     <>
-    <Card style={{ width: '18rem' }}>
-      <Card.Img variant="top" src="holder.js/100px180" />
-      <Card.Body>
-        <Card.Title>Playlist</Card.Title>
-        <Card.Text>
-          Some quick example text to build on the card title and make up the bulk of
-          the card's content.
-        </Card.Text>
-        <Button variant="primary">Go somewhere</Button>
-      </Card.Body>
-    </Card>
-    </>
+    <h1>Playlists</h1>
+    
+      <ListGroup className="playlists-list">
+      {arePlaylistsRequested? playlists.map(playlist => (
+        <>
+        <ListGroup.Item className="playlist-title">
+          <Link to="/playlist" onClick={() => dispatch({type: 'set', selectedPlaylist: playlist})}>
+            {playlist.playlistName.concat(" ").concat(playlist.totalDuration)}
+          </Link>
+        </ListGroup.Item>
+        </>
+      ))
+      :null}
+      </ListGroup>
+   </>
   )
 }
 

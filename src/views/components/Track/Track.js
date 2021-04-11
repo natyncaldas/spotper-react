@@ -5,11 +5,12 @@ import { Link } from 'react-router-dom'
 import './Track.scss'
 
 const Track = () => {
-const selectedTrack = useSelector(state => state.selectedTrack)
+    const selectedTrack = useSelector(state => state.selectedTrack)
+    const lastVisitedPath = useSelector(state => state.lastVisitedPath)
   
   return (
     <>
-        <Link to="/album" className="btn btn-primary">Return to Album</Link>
+        <Link to={lastVisitedPath} className="btn btn-primary">Return</Link>
         <div className="track-flex-container">
         <Card style={{ width: '22rem' }} className="track-card" >
             <Card.Img variant="top" src={selectedTrack.album.albumCover}  className="album-image"/>

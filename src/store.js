@@ -2,7 +2,9 @@ import {createStore} from 'redux'
 
 const initialState = {
   //stateName: stateValue
+  lastVisitedPath: "/",
   albums: [],
+  playlists: [],
   selectedAlbum: { 
     "albumDescription": "",
     "purchasePrice": null,
@@ -11,6 +13,11 @@ const initialState = {
     "recordingDate": null,
     "albumName": "",
     "albumCover": ""
+  },
+  selectedPlaylist:{
+    "id":null,
+    "playlistName":"",
+    "totalDuration":0
   },
   selectedTrack: {
     "trackName": "",

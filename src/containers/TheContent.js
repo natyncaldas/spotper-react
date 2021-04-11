@@ -6,6 +6,7 @@ import AlbumsPage from 'src/views/components/AlbumsPage/AlbumsPage'
 import PlaylistsPage from 'src/views/components/PlaylistsPage/PlaylistsPage'
 import Album from 'src/views/components/Album/Album'
 import Track from 'src/views/components/Track/Track'
+import Playlist from 'src/views/components/Playlist/Playlist'
 
 const loading = (
   <div className="pt-3 text-center">
@@ -30,6 +31,15 @@ const TheContent = () => {
                 </CFade>
               )}/>
 
+              <Route
+              path="/album"
+              name="Album"
+              render={props => (
+                <CFade>
+                  <Album {...props} />
+                </CFade>
+              )}/>  
+
             <Route
               path="/playlists"
               name="Playlists"
@@ -39,14 +49,14 @@ const TheContent = () => {
                 </CFade>
               )}/>
 
-              <Route
-              path="/album"
-              name="Album"
+            <Route
+              path="/playlist"
+              name="Playlist"
               render={props => (
                 <CFade>
-                  <Album {...props} />
+                  <Playlist {...props} />
                 </CFade>
-              )}/>  
+              )}/>
 
               <Route
               path="/track"

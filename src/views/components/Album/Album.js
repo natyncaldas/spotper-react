@@ -24,7 +24,12 @@ const Album = () => {
     }
     requestGetAlbumTracks()
            
-    }, [])
+  }, [])
+
+  const onTrackClick = (track) => {
+    dispatch({type: 'set', selectedTrack: track})
+    dispatch({type: 'set', lastVisitedPath: "/album"})
+  }
   
   return (
     <>
@@ -35,7 +40,7 @@ const Album = () => {
       {areTracksRequested?<ol>
         {albumTracks.map(track => (
           <li className="track">
-            <Link to="/track" onClick={()=>dispatch({type: 'set', selectedTrack: track})}>{track.trackName}</Link>
+            <Link to="/track" onClick={onTrackClick(track)}>{track.trackName}</Link>
           </li>
         ))}
       </ol>:null}
