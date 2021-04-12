@@ -8,6 +8,7 @@ import ChoosePlaylistModal from './ChoosePlaylistModal/ChoosePlaylistModal'
 
 const Album = () => {
   const selectedAlbum = useSelector(state => state.selectedAlbum)
+  const [trackToAddToPlaylist, setTrackToAddToPlaylist] = useState({})
   const [albumTracks, setAlbumTracks] = useState([])
   const [areTracksRequested, setTracksRequested] = useState(false)
   const [isAlbumRequested, setAlbumRequested] = useState(false)
@@ -42,11 +43,21 @@ const Album = () => {
     dispatch({type: 'set', selectedTrack: track})
     dispatch({type: 'set', lastVisitedPath: "/albums/".concat(selectedAlbum.id)})
   }
+
+  const onAddToPlaylistClick = (track) => {
+    setTrackToAddToPlaylist(track)
+    setShowModal(true)
+  }
   
   return (
     <>
     {isAlbumRequested?
     <>
+    <ChoosePlaylistModal
+      show = {showModal}
+      handleClose = {() => setShowModal(false)}
+      track= {trackToAddToPlaylist}
+    />
     <h1>{selectedAlbum.albumName}</h1>
     <Link to="/albums" className="btn btn-primary">Return to Albums</Link>
     <div className="album-flex-container">
@@ -55,14 +66,10 @@ const Album = () => {
         {albumTracks.map(track => (
           <li className="track">
             <Link to={"/track/".concat(track.id)} onClick={onTrackClick(track)}>{track.trackName}</Link>
-            <Button variant="success" size="sm" onClick={() => setShowModal(true)}>
+            <Button variant="success" size="sm" onClick={()=>onAddToPlaylistClick(track)}>
               Add to playlist
             </Button>
-            <ChoosePlaylistModal
-              show = {showModal}
-              handleClose = {() => setShowModal(false)}
-              track= {track}
-            />
+            
           </li>
         ))}
       </ol>:null}

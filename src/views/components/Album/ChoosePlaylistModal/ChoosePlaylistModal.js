@@ -46,6 +46,7 @@ const ChoosePlaylistModal = (props) => {
     const onSubmitHandler = async (event) => {
         event.preventDefault()
         requestPostTrackOnPlaylist(chosenPlaylist)
+        alert(props.track.id)
         const timeout = setTimeout(() => {
             props.handleClose()
           }, 800);
