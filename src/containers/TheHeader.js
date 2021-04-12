@@ -17,10 +17,6 @@ const TheHeader = () => {
         <Nav.Link href="#albums" className="nav-link">Albums</Nav.Link>
         <Nav.Link href="#playlists" className="nav-link">Playlists</Nav.Link>
       </Nav>
-      <Form inline>
-        <FormControl type="text" placeholder="Search" className="search-field mr-sm-2" />
-        <Button variant="outline-info" className="search-button">Search</Button>
-    </Form>
   </Navbar>
     
   )
