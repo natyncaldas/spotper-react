@@ -20,6 +20,12 @@
     border-radius: 5px;
 }
 
+@media screen and (max-width: 450px){
+    .album-cover{
+        width: 350px;
+    }
+}
+
 .flex-container{
     display: flex;
     flex-flow: row nowrap;
