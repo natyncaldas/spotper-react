@@ -5,6 +5,7 @@ const initialState = {
   lastVisitedPath: "/",
   albums: [],
   playlists: [],
+  tracks: [],
   selectedAlbum: { 
     "albumDescription": "",
     "purchasePrice": null,

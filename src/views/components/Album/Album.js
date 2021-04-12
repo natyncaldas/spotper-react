@@ -26,9 +26,8 @@ const Album = () => {
           }})
     }
     const requestGetAlbumTracks = async() => {
-      let params = {params:{albumId:albumId}}
   
-      await spotperApi.get("/tracks", params).then(response => {
+      await spotperApi.get("/albums/".concat(albumId).concat("/tracks")).then(response => {
           if(response.status === 200) {
             setAlbumTracks(response.data)
             setTracksRequested(true)
