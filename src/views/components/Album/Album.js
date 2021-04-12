@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react'
-import {Card} from 'react-bootstrap'
+import {Card, Button} from 'react-bootstrap'
 import {useSelector, useDispatch} from 'react-redux'
 import './Album.scss'
 import { spotperApi } from '../../../services/api'
 import { Link, useParams } from 'react-router-dom'
+import ChoosePlaylistModal from './ChoosePlaylistModal/ChoosePlaylistModal'
 
 const Album = () => {
   const selectedAlbum = useSelector(state => state.selectedAlbum)
   const [albumTracks, setAlbumTracks] = useState([])
   const [areTracksRequested, setTracksRequested] = useState(false)
   const [isAlbumRequested, setAlbumRequested] = useState(false)
+  const [showModal, setShowModal] = useState(false);
   const dispatch = useDispatch()
   const { albumId } = useParams();
 
@@ -54,6 +56,14 @@ const Album = () => {
         {albumTracks.map(track => (
           <li className="track">
             <Link to={"/track/".concat(track.id)} onClick={onTrackClick(track)}>{track.trackName}</Link>
+            <Button variant="success" size="sm" onClick={() => setShowModal(true)}>
+              Add to playlist
+            </Button>
+            <ChoosePlaylistModal
+              show = {showModal}
+              handleClose = {() => setShowModal(false)}
+              track= {track}
+            />
           </li>
         ))}
       </ol>:null}

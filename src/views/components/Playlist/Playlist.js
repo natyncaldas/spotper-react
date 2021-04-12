@@ -34,13 +34,23 @@ const Playlist = () => {
     }
     
     requestGetPlaylistById()
-    requestGetPlaylistTracks()
-           
-    }, [])
+
+    if(!areTracksRequested){   
+        requestGetPlaylistTracks()
+    }
+    }, [areTracksRequested])
 
     const onTrackClick = (track) => {
         dispatch({type: 'set', selectedTrack: track})
         dispatch({type: 'set', lastVisitedPath: "/playlists/".concat(playlistId)})
+    }
+
+    const requestDeleteTrackFromPlaylist = async(trackId) =>{
+        let params = {params:{"trackId":trackId, "playlistId":playlistId}}
+        await spotperApi.delete("/tracks/playlists", params).then(response => {
+            if(response.status === 200) {
+                setTracksRequested(false)
+            }})
     }
 
     return (
@@ -57,6 +67,9 @@ const Playlist = () => {
                         <Link to={"/track/".concat(track.id)} onClick={onTrackClick(track)}>
                             {track.trackName}
                         </Link>
+                        <Button variant="danger" size="sm" onClick={()=>requestDeleteTrackFromPlaylist(track.id)}>
+                            Delete
+                        </Button>
                     </ListGroup.Item>
                     </>
                 ))}
