@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import {Alert, Button, Modal, Form} from 'react-bootstrap'
 import {useSelector, useDispatch} from 'react-redux'
-import { Link, useParams } from 'react-router-dom'
 import { spotperApi } from '../../../../services/api'
 import './ChooseTrackModal.scss'
 
 const ChooseTrackModal = (props) => {
-    const dispatch = useDispatch()
     const [areTracksRequested, setTracksRequested] = useState(false)
     const [chosenTrack, setChosenTrack] = useState()
     const [showWarningAlert, setShowWarningAlert] = useState(false)
     const [showSuccessAlert, setShowSuccessAlert] = useState(false)
     const tracks = useSelector(state => state.tracks)
+    const dispatch = useDispatch()
 
    
     useEffect(() => {
@@ -22,12 +21,11 @@ const ChooseTrackModal = (props) => {
                 if(response.status === 200) {
                   dispatch({type: 'set', tracks: response.data})
                   setTracksRequested(true)
-                  //alert(playlists[0].playlistName)
                 }})
           }
           requestGetAllTracks()
         }        
-      }, [props.show])
+      }, [props.show, dispatch])
         
     
 
@@ -54,7 +52,7 @@ const ChooseTrackModal = (props) => {
             setShowSuccessAlert(false)
             setShowWarningAlert(false)
             props.handleClose()
-          }, 2000);
+          }, 1500);
         
         return() => {
             clearTimeout(timeout)

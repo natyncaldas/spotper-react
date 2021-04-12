@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import {Card, Button, ProgressBar} from 'react-bootstrap'
+import {Card, ProgressBar} from 'react-bootstrap'
 import {useSelector, useDispatch} from 'react-redux'
 import { Link, useParams } from 'react-router-dom'
 import { spotperApi } from '../../../services/api'
@@ -7,9 +7,9 @@ import './Track.scss'
 
 const Track = () => {
     const [isTrackRequested, setTrackRequested] = useState(false)
+    const { trackId } = useParams();
     const selectedTrack = useSelector(state => state.selectedTrack)
     const lastVisitedPath = useSelector(state => state.lastVisitedPath)
-    const { trackId } = useParams();
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -25,7 +25,7 @@ const Track = () => {
       
         requestGetTrackById()
                
-        }, [])
+    }, [trackId, dispatch])
 
     const requestPutTrackById = async(playCount, lastPlayed) => {
       let track = {    

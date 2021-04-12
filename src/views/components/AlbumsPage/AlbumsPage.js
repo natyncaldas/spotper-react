@@ -8,8 +8,8 @@ import './AlbumsPage.scss'
 const AlbumsPage = () => {
   
   const [areAlbunsRequested, setAlbunsRequested] = useState(false)
-  const dispatch = useDispatch()
   const albums = useSelector(state => state.albums)
+  const dispatch = useDispatch()
 
   useEffect(() => {
 
@@ -24,7 +24,7 @@ const AlbumsPage = () => {
 
   requestGetAlbums()
          
-  }, [])
+  }, [dispatch])
   
   return (
     <>
@@ -35,8 +35,6 @@ const AlbumsPage = () => {
         {<Card.Img variant="top" src={album.albumCover}  className="album-image"/>}
         <Card.Body>
           <Card.Title>{album.albumName}</Card.Title>
-          {/*<Card.Title>{album.artists[0].name}</Card.Title>
-          <Card.Text>{album.copyrights[0].text}</Card.Text>*/}
           <Link to={"/albums/".concat(album.id)} className="album-btn btn btn-primary" onClick={()=>dispatch({type: 'set', selectedAlbum: album})}>Go to album</Link>
         </Card.Body>
      </Card>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import {Card, Button, ListGroup} from 'react-bootstrap'
+import { Button, ListGroup} from 'react-bootstrap'
 import {useSelector, useDispatch} from 'react-redux'
 import './Album.scss'
 import { spotperApi } from '../../../services/api'
@@ -7,12 +7,12 @@ import { Link, useParams } from 'react-router-dom'
 import ChoosePlaylistModal from './ChoosePlaylistModal/ChoosePlaylistModal'
 
 const Album = () => {
-  const selectedAlbum = useSelector(state => state.selectedAlbum)
   const [trackToAddToPlaylist, setTrackToAddToPlaylist] = useState({})
   const [albumTracks, setAlbumTracks] = useState([])
   const [areTracksRequested, setTracksRequested] = useState(false)
   const [isAlbumRequested, setAlbumRequested] = useState(false)
   const [showModal, setShowModal] = useState(false);
+  const selectedAlbum = useSelector(state => state.selectedAlbum)
   const dispatch = useDispatch()
   const { albumId } = useParams();
 
@@ -37,7 +37,7 @@ const Album = () => {
     requestGetAlbumById()
     requestGetAlbumTracks()
            
-  }, [])
+  }, [albumId, dispatch])
 
   const onTrackClick = (track) => {
     dispatch({type: 'set', selectedTrack: track})
@@ -67,11 +67,11 @@ const Album = () => {
       {selectedAlbum.albumName}
     </h1>
     <div className="album-flex-container">
-      <img src={selectedAlbum.albumCover} className="album-cover"></img>
+      <img src={selectedAlbum.albumCover} alt="album cover" className="album-cover"></img>
       {areTracksRequested?<ListGroup variant="flush">
         {albumTracks.map(track => (
           <ListGroup.Item className="flex-container">
-            <Link className="track" to={"/track/".concat(track.id)} onClick={onTrackClick(track)}>{track.trackName}</Link>
+            <Link className="track" to={"/track/".concat(track.id)} onClick={onTrackClick(track)}>{"".concat(track.trackNumber).concat(". ").concat(track.trackName)}</Link>
             <Button variant="success" size="sm" onClick={()=>onAddToPlaylistClick(track)}>
               <svg xmlns="http://www.w3.org/2000/svg" width="20" fill="currentColor" class="bi bi-bookmark-plus" viewBox="0 0 16 16">
                 <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z"/>

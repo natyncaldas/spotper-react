@@ -1,5 +1,5 @@
 import React from 'react'
-import {Navbar, Nav, Form, FormControl, Button} from 'react-bootstrap'
+import {Navbar, Nav} from 'react-bootstrap'
 import Logo from '../assets/icons/SpotPer.png'
 
 const TheHeader = () => {

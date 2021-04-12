@@ -6,29 +6,9 @@ const initialState = {
   albums: [],
   playlists: [],
   tracks: [],
-  selectedAlbum: { 
-    "albumDescription": "",
-    "purchasePrice": null,
-    "purchaseDate": null,
-    "purchaseType": "",
-    "recordingDate": null,
-    "albumName": "",
-    "albumCover": ""
-  },
-  selectedPlaylist:{
-    "id":null,
-    "playlistName":"",
-    "totalDuration":0
-  },
-  selectedTrack: {
-    "trackName": "",
-    "trackDuration": null,
-    "trackDescription": "",
-    "recordingType": "",
-    "trackNumber": null,
-    "album":{"id":null, "albumCover": ""},
-    "composition":{"id":null}
-  } 
+  selectedAlbum: {},
+  selectedPlaylist:{},
+  selectedTrack: {} 
 }
 
 const changeState = (state = initialState, {type, ...rest}) => {

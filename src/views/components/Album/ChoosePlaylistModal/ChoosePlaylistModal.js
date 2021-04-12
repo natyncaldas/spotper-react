@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import {Alert, Button, Modal, Form} from 'react-bootstrap'
 import {useSelector, useDispatch} from 'react-redux'
-import { Link, useParams } from 'react-router-dom'
 import { spotperApi } from '../../../../services/api'
 import './ChoosePlaylistModal.scss'
 
 const ChoosePlaylistModal = (props) => {
-    const dispatch = useDispatch()
     const [arePlaylistsRequested, setPlaylistsRequested] = useState(false)
     const [chosenPlaylist, setChosenPlaylist] = useState()
     const [showWarningAlert, setShowWarningAlert] = useState(false)
     const [showSuccessAlert, setShowSuccessAlert] = useState(false)
     const playlists = useSelector(state => state.playlists)
+    const dispatch = useDispatch()
 
    
     useEffect(() => {
@@ -22,12 +21,11 @@ const ChoosePlaylistModal = (props) => {
                 if(response.status === 200) {
                   dispatch({type: 'set', playlists: response.data})
                   setPlaylistsRequested(true)
-                  //alert(playlists[0].playlistName)
                 }})
           }
           requestGetPlaylists()
         }        
-      }, [props.show])
+      }, [props.show, dispatch])
         
     
 
@@ -45,7 +43,7 @@ const ChoosePlaylistModal = (props) => {
             }}).catch(error => {
               setShowWarningAlert(true)
             })
-      }
+    }
 
     const onSubmitHandler = async (event) => {
         event.preventDefault()
@@ -54,12 +52,11 @@ const ChoosePlaylistModal = (props) => {
             setShowSuccessAlert(false)
             setShowWarningAlert(false)
             props.handleClose()
-          }, 2000);
+          }, 1500);
         
         return() => {
             clearTimeout(timeout)
-        }
-        
+        }    
     }
   
     return (

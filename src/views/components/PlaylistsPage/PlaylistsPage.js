@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import {Card, Button, ListGroup, Modal} from 'react-bootstrap'
+import {Button, ListGroup} from 'react-bootstrap'
 import {useDispatch, useSelector} from 'react-redux'
 import { Link } from 'react-router-dom'
 import { spotperApi } from '../../../services/api'
@@ -24,7 +24,8 @@ const PlaylistsPage = () => {
       }
       requestGetPlaylists()
     }        
-  }, [arePlaylistsRequested])
+  }, [arePlaylistsRequested, dispatch])
+
 
   const requestDeletePlaylist = async(playlistId) => {
 
@@ -53,11 +54,10 @@ const PlaylistsPage = () => {
       handleClose = {handleCloseModal}
     />
     <h1>Playlists</h1>
-      
     
       <ListGroup className="playlists-list">
       {arePlaylistsRequested? playlists.map(playlist => (
-        <>
+        <> 
         <ListGroup.Item className="playlist-title">
           <Link className="playlist-item" to={"/playlists/".concat(playlist.id)} onClick={() => dispatch({type: 'set', selectedPlaylist: playlist})}>
             {playlist.playlistName}

@@ -1,13 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import {Button, Modal, Form} from 'react-bootstrap'
-import {useSelector, useDispatch} from 'react-redux'
-import { Link, useParams } from 'react-router-dom'
 import { spotperApi } from '../../../../services/api'
 import './NewPlaylistModal.scss'
 
 const NewPlaylistModal = (props) => {
     const [playlistName, setPlaylistName] = useState("")
-    const dispatch = useDispatch()
 
     const requestPostPlaylist = async() => {
 
@@ -17,7 +14,6 @@ const NewPlaylistModal = (props) => {
 
         await spotperApi.post("/playlists", playlist).then(response => {
             if(response.status === 200) {
-              //dispatch({type: 'set', selectedPlaylist: response.data})
               setPlaylistName("")
             }})
       }
