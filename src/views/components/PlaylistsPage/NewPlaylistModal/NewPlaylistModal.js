@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
-import {Button, Modal, Form} from 'react-bootstrap'
+import {Button, Modal, Form, Spinner} from 'react-bootstrap'
 import { spotperApi } from '../../../../services/api'
 import './NewPlaylistModal.scss'
 
 const NewPlaylistModal = (props) => {
     const [playlistName, setPlaylistName] = useState("")
+    const [isLoading, setLoading] = useState(false)
 
     const requestPostPlaylist = async() => {
 
@@ -21,7 +22,9 @@ const NewPlaylistModal = (props) => {
     const onSubmitHandler = async (event) => {
         event.preventDefault()
         requestPostPlaylist()
+        setLoading(true)
         const timeout = setTimeout(() => {
+            setLoading(false)
             props.handleClose()
           }, 800);
         
@@ -47,7 +50,7 @@ const NewPlaylistModal = (props) => {
                         Enter a name for your new playlist.
                         </Form.Text>
                         <Button variant="success" type="submit">
-                            Create playlist
+                          {isLoading?<Spinner animation="border" size="sm"/>:"Create playlist"}
                         </Button>
                     </Form.Group>
                 </Form>

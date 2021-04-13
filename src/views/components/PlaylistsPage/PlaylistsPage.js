@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import {Button, ListGroup} from 'react-bootstrap'
+import {Button, ListGroup, Spinner} from 'react-bootstrap'
 import {useDispatch, useSelector} from 'react-redux'
 import { Link } from 'react-router-dom'
 import { spotperApi } from '../../../services/api'
@@ -54,9 +54,11 @@ const PlaylistsPage = () => {
       handleClose = {handleCloseModal}
     />
     <h1>Playlists</h1>
-    
+
+      {arePlaylistsRequested?
+      <>
       <ListGroup className="playlists-list">
-      {arePlaylistsRequested? playlists.map(playlist => (
+        {playlists.map(playlist => (
         <> 
         <ListGroup.Item className="playlist-title">
           <Link className="playlist-item" to={"/playlists/".concat(playlist.id)} onClick={() => dispatch({type: 'set', selectedPlaylist: playlist})}>
@@ -80,8 +82,7 @@ const PlaylistsPage = () => {
           
         </ListGroup.Item>
         </>
-      ))
-      :null}
+      ))}
       </ListGroup>
 
       <Button variant="success" className="add-btn" onClick={() => setShowModal(true)}>
@@ -92,6 +93,8 @@ const PlaylistsPage = () => {
         </span>
         New Playlist
       </Button>
+      </>
+      :<Spinner animation="border" variant="success" className="centered"/>}
    </>
   )
 }

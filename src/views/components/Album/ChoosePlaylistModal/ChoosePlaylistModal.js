@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import {Alert, Button, Modal, Form} from 'react-bootstrap'
+import {Alert, Button, Modal, Form, Spinner} from 'react-bootstrap'
 import {useSelector, useDispatch} from 'react-redux'
 import { spotperApi } from '../../../../services/api'
 import './ChoosePlaylistModal.scss'
@@ -9,6 +9,7 @@ const ChoosePlaylistModal = (props) => {
     const [chosenPlaylist, setChosenPlaylist] = useState()
     const [showWarningAlert, setShowWarningAlert] = useState(false)
     const [showSuccessAlert, setShowSuccessAlert] = useState(false)
+    const [isLoading, setLoading] = useState(false)
     const playlists = useSelector(state => state.playlists)
     const dispatch = useDispatch()
 
@@ -48,9 +49,11 @@ const ChoosePlaylistModal = (props) => {
     const onSubmitHandler = async (event) => {
         event.preventDefault()
         requestPostTrackOnPlaylist(chosenPlaylist)
+        setLoading(true)
         const timeout = setTimeout(() => {
             setShowSuccessAlert(false)
             setShowWarningAlert(false)
+            setLoading(false)
             props.handleClose()
           }, 1500);
         
@@ -86,7 +89,8 @@ const ChoosePlaylistModal = (props) => {
                         Choose the playlist in which you would like to add the selected track
                         </Form.Text>
                         <Button variant="success" type="submit">
-                            Add track to playlist
+                            {isLoading?<Spinner animation="border" size="sm"/>:
+                            "Add track to playlist"}
                         </Button>
                     </Form.Group>
                 </Form>

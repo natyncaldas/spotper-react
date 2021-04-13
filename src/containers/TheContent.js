@@ -26,9 +26,11 @@ const TheContent = () => {
               path="/albums/:albumId"
               name="Album"
               render={props => (
-                <CFade>
-                  <Album {...props} />
-                </CFade>
+                <Suspense fallback={loading}>
+                  <CFade>
+                    <Album {...props} />
+                  </CFade>
+                </Suspense>
               )}/> 
 
             <Route
@@ -45,9 +47,11 @@ const TheContent = () => {
               path="/playlists/:playlistId"
               name="Playlist"
               render={props => (
-                <CFade>
-                  <Playlist {...props} />
-                </CFade>
+                <Suspense fallback={loading}>
+                  <CFade>
+                    <Playlist {...props} />
+                  </CFade>
+                </Suspense>
               )}/>
 
             <Route

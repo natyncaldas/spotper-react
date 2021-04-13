@@ -68,7 +68,8 @@ const Album = () => {
     </h1>
     <div className="album-flex-container">
       <img src={selectedAlbum.albumCover} alt="album cover" className="album-cover"></img>
-      {areTracksRequested?<ListGroup variant="flush">
+      {areTracksRequested?
+      <ListGroup variant="flush" >
         {albumTracks.map(track => (
           <ListGroup.Item className="flex-container">
             <Link className="track" to={"/track/".concat(track.id)} onClick={onTrackClick(track)}>{"".concat(track.trackNumber).concat(". ").concat(track.trackName)}</Link>

@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import {Card} from 'react-bootstrap'
+import {Card, Spinner} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
 import {useDispatch, useSelector} from 'react-redux'
 import { spotperApi } from '../../../services/api'
@@ -30,15 +30,22 @@ const AlbumsPage = () => {
     <>
     <h1>Albums</h1>
     <div className="albums-flex-container">
-       {areAlbunsRequested? albums.map( album => (
+    {areAlbunsRequested? albums.map( album => (
       <Card style={{ width: '18rem' }} className="album-card" >
         {<Card.Img variant="top" src={album.albumCover}  className="album-image"/>}
         <Card.Body>
           <Card.Title>{album.albumName}</Card.Title>
-          <Link to={"/albums/".concat(album.id)} className="album-btn btn btn-primary" onClick={()=>dispatch({type: 'set', selectedAlbum: album})}>Go to album</Link>
+          <Card.Text>{album.recordingDate.substr(0, 10).replaceAll('-', '/')}</Card.Text>
+          <Link to={"/albums/".concat(album.id)} className="album-btn btn btn-primary" onClick={()=>dispatch({type: 'set', selectedAlbum: album})}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24"  fill="currentColor" class="bi bi-disc-fill" viewBox="0 0 16 16">
+              <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-6 0a2 2 0 1 0-4 0 2 2 0 0 0 4 0zM4 8a4 4 0 0 1 4-4 .5.5 0 0 0 0-1 5 5 0 0 0-5 5 .5.5 0 0 0 1 0zm9 0a.5.5 0 1 0-1 0 4 4 0 0 1-4 4 .5.5 0 0 0 0 1 5 5 0 0 0 5-5z"/>
+            </svg>
+            <span className="album-btn-text">Go to album</span>
+          </Link>
         </Card.Body>
      </Card>
-    )):null}
+    ))
+    :<Spinner animation="border" variant="success" className="centered"/>}
     </div>
   </>
   )
