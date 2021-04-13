@@ -1,6 +1,5 @@
 // Here you can add other styles
 
-
 .header{
     background-color: #263f43 !important;
     border: none;
@@ -16,6 +15,21 @@
      font-family: 'Montserrat', sans-serif;
      font-size: 16px;
  }
+
+ .search-field{
+     border-color: #90e6ab!important;
+ }
+
+ .search-button{
+    border-color: #90e6ab!important;
+    color: #90e6ab!important;
+}
+
+.search-button:hover{
+    background-color: #90e6ab!important;
+    border-color: #90e6ab!important;
+    color: darkslategray!important;
+}
 
  .footer{
     background-color: lightgray !important;

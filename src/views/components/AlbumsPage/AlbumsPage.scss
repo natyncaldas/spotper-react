@@ -1,0 +1,53 @@
+h1{
+    color: #90e6ab;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+}
+
+.centered {
+    position: fixed; /* or absolute */
+    top: 50%;
+    left: 50%;
+}
+
+.albums-flex-container{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+}
+
+.album-card{
+    background-color: rgb(62, 82, 82)!important;
+    border: none;
+    box-shadow:  1px 3px 5px rgb(27, 44, 44);
+    color: lightgray!important;
+    margin: 10px, 10px, 10px, 10px!important;
+    padding: 10px;
+
+}
+
+.album-card:hover{
+    background-color: rgb(73, 80, 80)!important;
+}
+
+.album-image{
+    margin: 10px, 10px, 10px, 10px;
+}
+
+.album-btn{
+    background-color: #90e6ab!important;
+    border: none;
+    color: black!important;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.album-btn:hover{
+    background-color: springgreen!important;
+    box-shadow: 0 0 0 2px lightgreen;
+}
+
+.album-btn-text{
+    margin-left: 3px;
+}
+
+

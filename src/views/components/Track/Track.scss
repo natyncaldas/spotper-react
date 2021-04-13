@@ -1,0 +1,22 @@
+
+.track-card{
+    box-shadow:  1px 8px 8px rgb(22, 37, 37);
+}
+.track-flex-container{
+    display: flex;
+    justify-content: center;
+}
+
+.btns-flex-container{
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-evenly;
+    margin-top: 10px;
+}
+.track-btns{
+    color: rgb(34, 58, 58)!important;
+}
+.track-btns:hover{
+    color: springgreen!important;
+    cursor: pointer;
+}

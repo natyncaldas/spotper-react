@@ -2,7 +2,11 @@ import React, {Suspense} from 'react'
 import {CContainer, CFade} from '@coreui/react'
 import {Redirect, Route, Switch} from 'react-router-dom'
 
-import Dashboard from 'src/views/dashboard/Dashboard'
+import AlbumsPage from 'src/views/components/AlbumsPage/AlbumsPage'
+import PlaylistsPage from 'src/views/components/PlaylistsPage/PlaylistsPage'
+import Album from 'src/views/components/Album/Album'
+import Track from 'src/views/components/Track/Track'
+import Playlist from 'src/views/components/Playlist/Playlist'
 
 const loading = (
   <div className="pt-3 text-center">
@@ -11,21 +15,64 @@ const loading = (
 )
 
 const TheContent = () => {
+  
   return (
     <main className="c-main">
       <CContainer fluid>
         <Suspense fallback={loading}>
           <Switch>
+
+              <Route
+              path="/albums/:albumId"
+              name="Album"
+              render={props => (
+                <Suspense fallback={loading}>
+                  <CFade>
+                    <Album {...props} />
+                  </CFade>
+                </Suspense>
+              )}/> 
+
             <Route
-              path="/dashboard"
-              name="Dashboard"
+              path="/albums"
+              name="Albums"
               render={props => (
                 <CFade>
-                  <Dashboard {...props} />
+                  <AlbumsPage {...props} 
+                  />
+                </CFade>
+              )}/> 
+
+            <Route
+              path="/playlists/:playlistId"
+              name="Playlist"
+              render={props => (
+                <Suspense fallback={loading}>
+                  <CFade>
+                    <Playlist {...props} />
+                  </CFade>
+                </Suspense>
+              )}/>
+
+            <Route
+              path="/playlists"
+              name="Playlists"
+              render={props => (
+                <CFade>
+                  <PlaylistsPage {...props} />
                 </CFade>
               )}/>
+
+              <Route
+              path="/track/:trackId"
+              name="Track"
+              render={props => (
+                <CFade>
+                  <Track {...props} />
+                </CFade>
+              )}/>    
               
-            <Redirect from="/" to="/dashboard"/>
+            <Redirect from="/" to="/albums"/>
           </Switch>
         </Suspense>
       </CContainer>

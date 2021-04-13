@@ -1,0 +1,47 @@
+.centered {
+    position: fixed; /* or absolute */
+    top: 50%;
+    left: 50%;
+}
+
+.playlists-list{
+    color: white!important;
+    margin-top: 20px;
+}
+
+.playlist-title{
+   
+    border-color: white!important;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+}
+
+.playlist-item{
+     color: white!important;
+     font-family: 'Montserrat', sans-serif;
+     font-size: 20px;
+     font-weight: bold;
+     margin-right: 10px;
+}
+
+.playlist-item:hover{
+    color: springgreen!important;
+    text-decoration: none;
+}
+
+.add-icon{
+    margin-right: 5px;
+}
+.add-btn{
+    margin-top: 20px;
+}
+
+.delete-btn{
+    color: rgb(241, 83, 83);
+    cursor: pointer;
+}
+
+.delete-btn:hover{
+    color: rgb(121, 21, 21);
+}

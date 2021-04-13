@@ -14,10 +14,9 @@ const TheHeader = () => {
         /> 
       </Navbar.Brand>
       <Nav className="mr-auto">
-        <Nav.Link href="#dashboard" className="nav-link">Albums</Nav.Link>
-        <Nav.Link href="#dashboard" className="nav-link">Playlists</Nav.Link>
+        <Nav.Link href="#albums" className="nav-link">Albums</Nav.Link>
+        <Nav.Link href="#playlists" className="nav-link">Playlists</Nav.Link>
       </Nav>
-   
   </Navbar>
     
   )

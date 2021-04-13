@@ -2,6 +2,13 @@ import {createStore} from 'redux'
 
 const initialState = {
   //stateName: stateValue
+  lastVisitedPath: "/",
+  albums: [],
+  playlists: [],
+  tracks: [],
+  selectedAlbum: {},
+  selectedPlaylist:{},
+  selectedTrack: {} 
 }
 
 const changeState = (state = initialState, {type, ...rest}) => {
